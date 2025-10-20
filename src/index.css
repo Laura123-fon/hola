@@ -1,0 +1,502 @@
+:root {
+    --blanco-suave: #F7F7F7;
+    --verde-esmeralda: #2E8B57;
+    --amarillo-mostaza: #FFD700;
+    --marron-claro: #8B4513;
+    --gris-oscuro: #333333;
+    --gris-medio: #666666;
+    --fondo-papel: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity=".1"><g fill="%23000"><path d="M0 50h100M50 0v100"/></g></svg>');
+}
+
+/* ==================== Estilos generales ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gris-oscuro);
+    background-color: var(--blanco-suave);
+    background-image: var(--fondo-papel);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--marron-claro);
+}
+
+a {
+    text-decoration: none;
+    color: var(--verde-esmeralda);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==================== Errores y bienvenida ==================== */
+#errorRegistro, #errorLogin {
+    color: red;
+    margin-top: 1rem;
+}
+
+#personalWelcome {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--verde-esmeralda);
+    margin-top: 1rem;
+}
+
+/* ==================== Header y Navbar ==================== */
+/* ==================== Header limpio y elegante ==================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--blanco-suave);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+}
+
+header .logo img {
+  height: 50px;
+}
+
+header nav {
+  display: flex;
+  gap: 1.5rem; /* espacio entre links */
+  align-items: center;
+}
+
+header nav a {
+  font-weight: bold;
+  color: var(--gris-oscuro);
+  text-decoration: none;
+  padding: 0.3rem 0.5rem;
+  transition: all 0.3s ease;
+}
+
+header nav a:hover {
+  color: var(--verde-esmeralda);
+  text-decoration: underline; /* elegante al pasar el mouse */
+}
+
+/* Botón de logout dentro del footer */
+footer .logoutBtn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--marron-claro);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+footer .logoutBtn:hover {
+  background-color: #6a360a;
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  padding: 2rem;
+  background-color: var(--gris-oscuro);
+  color: white;
+  text-align: center;
+  margin-top: auto;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ==================== Hero ==================== */
+.hero {
+    background: url('./paginapruebaSP/imagenes/fondo-hero.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 10rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    color: white;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    margin-top: 2rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--verde-esmeralda);
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* ==================== Secciones ==================== */
+section {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.about-section, .product-catalog-section {
+    background-color: white;
+    margin-top: 2rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.mission-vision {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.mission, .vision {
+    flex: 1;
+    padding: 1.5rem;
+    border-left: 5px solid var(--verde-esmeralda);
+    text-align: left;
+    background-color: var(--blanco-suave);
+    border-radius: 5px;
+}
+
+/* ==================== Mapas ==================== */
+.map-section ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+#huertoHogarMap {
+    background-color: #ccc;
+    margin-top: 1.5rem;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* ==================== Catálogo ==================== */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.product-info {
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.product-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--marron-claro);
+}
+
+.product-info p {
+    color: var(--gris-medio);
+    margin-bottom: 1rem;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--verde-esmeralda);
+}
+
+.add-to-cart-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--amarillo-mostaza);
+    color: var(--marron-claro);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #ffc400;
+}
+
+/* ==================== Footer ==================== */
+footer {
+    padding: 2rem;
+    background-color: var(--gris-oscuro);
+    color: white;
+    text-align: center;
+    margin-top: auto;
+}
+
+.social a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.social a:hover {
+    color: var(--verde-esmeralda);
+}
+
+/* ==================== Formularios Login y Registro ==================== */
+.container {
+    max-width: 400px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.container h2 {
+    margin-bottom: 1.5rem;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.container label {
+    align-self: flex-start;
+    font-weight: bold;
+    color: var(--gris-medio);
+}
+
+.container input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.container button {
+    padding: 0.75rem;
+    background-color: var(--verde-esmeralda);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.container button:hover {
+    background-color: #246a44;
+}
+
+.container p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.container a {
+    font-weight: bold;
+}
+
+
+
+:root {
+  --verde-esmeralda: #2E8B57;
+  --amarillo-mostaza: #FFD700;
+  --marron-claro: #8B4513;
+  --gris-oscuro: #333;
+  --gris-medio: #666;
+  --blanco: #fff;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header */
+.cart-header {
+  background: var(--verde-esmeralda);
+  color: var(--blanco);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-header h1 {
+  font-size: 1.5rem;
+}
+
+.btn-volver {
+  background: var(--amarillo-mostaza);
+  color: var(--marron-claro);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-volver:hover {
+  background: #e6c200;
+}
+
+/* Main container */
+.cart-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--blanco);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.cart-container h2 {
+  margin-bottom: 1rem;
+  color: var(--marron-claro);
+}
+
+/* Lista del carrito */
+.cart-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cart-info {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.cart-info h3 {
+  font-size: 1rem;
+  color: var(--gris-oscuro);
+}
+
+.cart-info p {
+  color: var(--gris-medio);
+  font-size: 0.9rem;
+}
+
+.cart-price {
+  font-weight: bold;
+  color: var(--verde-esmeralda);
+}
+
+/* Total y botón */
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-finalizar {
+  background: var(--verde-esmeralda);
+  color: var(--blanco);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  background: #246a44;
+}
+
+/* Footer */
+.cart-footer {
+  background: var(--gris-oscuro);
+  color: var(--blanco);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+.btn-volver-catalogo {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.btn-volver-catalogo:hover {
+  background-color: #45a049;
+}
