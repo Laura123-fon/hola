@@ -1,61 +1,121 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Product from "../organisms/Product";
+import Toast from "../organisms/Toast";
+import { CartContext } from "../organisms/CartContext";
+
 
 const productos = [
-  { id: 'FR001', nombre: 'Manzanas Fuji', categoria: 'frutas', precio: 1200, stock: 150, descripcion: 'Manzanas Fuji crujientes y dulces, cultivadas en el Valle del Maule.', imagen: './imagenes/manzanas.jpg' },
-  { id: 'FR002', nombre: 'Naranjas Valencia', categoria: 'frutas', precio: 1000, stock: 200, descripcion: 'Jugosas y ricas en vitamina C, ideales para zumos frescos.', imagen: './imagenes/Naranjas.png' },
-  { id: 'FR003', nombre: 'Plátanos Cavendish', categoria: 'frutas', precio: 800, stock: 250, descripcion: 'Plátanos maduros y dulces, perfectos para desayuno o snack.', imagen: './imagenes/Plátanos.png' },
-  { id: 'VR001', nombre: 'Zanahorias Orgánicas', categoria: 'verduras', precio: 900, stock: 100, descripcion: 'Zanahorias crujientes cultivadas sin pesticidas en O\'Higgins.', imagen: './imagenes/Zanahoria.jpg' },
-  { id: 'VR002', nombre: 'Espinacas Frescas', categoria: 'verduras', precio: 700, stock: 80, descripcion: 'Perfectas para ensaladas y batidos verdes.', imagen: './imagenes/Espinacas.png' },
-  { id: 'VR003', nombre: 'Pimientos Tricolores', categoria: 'verduras', precio: 1500, stock: 120, descripcion: 'Ricos en antioxidantes y vitaminas, ideales para salteados.', imagen: './imagenes/Pimientos.png' },
-  { id: 'PO001', nombre: 'Miel Orgánica', categoria: 'organicos', precio: 5000, stock: 50, descripcion: 'Miel pura y orgánica producida por apicultores locales.', imagen: './imagenes/Miel.webp' },
-  { id: 'PO003', nombre: 'Quinua Orgánica', categoria: 'organicos', precio: 3000, stock: 70, descripcion: 'Granos de quinua orgánica, perfectos para una dieta saludable.', imagen: './imagenes/Quinua.png' },
-  { id: 'PL001', nombre: 'Leche Entera', categoria: 'lacteos', precio: 1200, stock: 100, descripcion: 'Leche fresca de granjas locales, rica en calcio.', imagen: './imagenes/leches.webp' }
+  { 
+    id: 'FR001', nombre: 'Manzanas Fuji', categoria: 'frutas', precio: 1200, stock: 150, 
+    descripcion: 'Manzanas Fuji crujientes y dulces, cultivadas en el Valle del Maule.',
+    origen: 'Valle del Maule',
+    sostenibilidad: 'Cultivo sostenible sin pesticidas',
+    receta: 'Ensalada de manzana con nueces',
+    imagen: './imagenes/manzanas.jpg',
+    calificacion: 4.5
+  },
+  { 
+    id: 'FR002', nombre: 'Naranjas Valencia', categoria: 'frutas', precio: 1000, stock: 200, 
+    descripcion: 'Jugosas y ricas en vitamina C, ideales para zumos frescos.',
+    origen: 'Región de Valparaíso',
+    sostenibilidad: 'Agricultura responsable',
+    receta: 'Jugo de naranja natural',
+    imagen: './imagenes/Naranjas.png',
+    calificacion: 4.7
+  },
+  { 
+    id: 'FR003', nombre: 'Plátanos Cavendish', categoria: 'frutas', precio: 800, stock: 250, 
+    descripcion: 'Plátanos maduros y dulces, perfectos para desayuno o snack.',
+    origen: 'Zona Central',
+    sostenibilidad: 'Cultivo orgánico y responsable',
+    receta: 'Smoothie de plátano',
+    imagen: './imagenes/Plátanos.png',
+    calificacion: 4.4
+  },
+  { 
+    id: 'VR001', nombre: 'Zanahorias Orgánicas', categoria: 'verduras', precio: 900, stock: 100, 
+    descripcion: 'Zanahorias crujientes cultivadas sin pesticidas en O\'Higgins.',
+    origen: 'O\'Higgins',
+    sostenibilidad: 'Agricultura orgánica',
+    receta: 'Crema de zanahoria',
+    imagen: './imagenes/Zanahoria.jpg',
+    calificacion: 4.3
+  },
+  { 
+    id: 'VR002', nombre: 'Espinacas Frescas', categoria: 'verduras', precio: 700, stock: 80, 
+    descripcion: 'Perfectas para ensaladas y batidos verdes.',
+    origen: 'Región Metropolitana',
+    sostenibilidad: 'Cultivo sostenible sin químicos',
+    receta: 'Batido verde detox',
+    imagen: './imagenes/Espinacas.png',
+    calificacion: 4.6
+  },
+  { 
+    id: 'VR003', nombre: 'Pimientos Tricolores', categoria: 'verduras', precio: 1500, stock: 120, 
+    descripcion: 'Ricos en antioxidantes y vitaminas, ideales para salteados.',
+    origen: 'Región de Valparaíso',
+    sostenibilidad: 'Agricultura responsable',
+    receta: 'Salteado de pimientos',
+    imagen: './imagenes/Pimientos.png',
+    calificacion: 4.5
+  },
+  { 
+    id: 'PO001', nombre: 'Miel Orgánica', categoria: 'organicos', precio: 5000, stock: 50, 
+    descripcion: 'Miel pura y orgánica producida por apicultores locales.',
+    origen: 'Valle Central',
+    sostenibilidad: 'Apicultura sostenible',
+    receta: 'Endulzar té o postres',
+    imagen: './imagenes/Miel.webp',
+    calificacion: 4.8
+  },
+  { 
+    id: 'PO003', nombre: 'Quinua Orgánica', categoria: 'organicos', precio: 3000, stock: 70, 
+    descripcion: 'Granos de quinua orgánica, perfectos para una dieta saludable.',
+    origen: 'Región de Tarapacá',
+    sostenibilidad: 'Cultivo orgánico',
+    receta: 'Ensalada de quinua',
+    imagen: './imagenes/Quinua.png',
+    calificacion: 4.6
+  },
+  { 
+    id: 'PL001', nombre: 'Leche Entera', categoria: 'lacteos', precio: 1200, stock: 100, 
+    descripcion: 'Leche fresca de granjas locales, rica en calcio.',
+    origen: 'Región del Biobío',
+    sostenibilidad: 'Ganadería responsable',
+    receta: 'Ideal para café o cereal',
+    imagen: './imagenes/leches.webp',
+    calificacion: 4.6
+  }
 ];
-
 export default function Catalogo() {
   const [filtro, setFiltro] = useState("all");
-  const [carrito, setCarrito] = useState([]);
-
-  useEffect(() => {
-    const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
-    setCarrito(carritoGuardado);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-  }, [carrito]);
-
-  const agregarAlCarrito = (producto) => {
-    setCarrito(prev => {
-      const existe = prev.find(item => item.id === producto.id);
-      if (existe) {
-        return prev.map(item =>
-          item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
-        );
-      } else {
-        return [...prev, { 
-          id: producto.id,
-          name: producto.nombre,
-          image: producto.imagen,
-          price: producto.precio,
-          cantidad: 1
-        }];
-      }
-    });
-    alert(`${producto.nombre} agregado al carrito 🛒`);
-  };
+  const [toastMsg, setToastMsg] = useState("");
+  const [toastKey, setToastKey] = useState(0);
+  const { carrito, agregarAlCarrito } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const productosFiltrados = filtro === "all"
     ? productos
     : productos.filter(p => p.categoria === filtro);
 
+  const handleAdd = (producto) => {
+    agregarAlCarrito(producto);
+    setToastMsg(`${producto.nombre} agregado al carrito 🛒`);
+    setToastKey(prev => prev + 1);
+  };
+
   return (
     <div className="catalog-page">
-      <header className="cart-header">
-        <h1>Catálogo de HuertoHogar</h1>
-        <p>Carrito: {carrito.reduce((acc, item) => acc + item.cantidad, 0)} items</p>
+      <header className="catalog-header">
         <a href="/" className="back-btn1">← Volver al inicio</a>
+        <h1>Catálogo de HuertoHogar</h1>
+        <div className="cart-info">
+        Carrito: {carrito.reduce((acc, item) => acc + item.cantidad, 0)} items
+           <button className="cart-info2" onClick={() => navigate("/carrito")}>
+            🛒 Ir al Carrito
+          </button>
+        </div>
       </header>
 
       <section className="filters">
@@ -70,9 +130,13 @@ export default function Catalogo() {
 
       <section className="product-list">
         {productosFiltrados.map(producto => (
-          <Product key={producto.id} producto={producto} onAddToCart={agregarAlCarrito} />
+          <Product key={producto.id} producto={producto} onAddToCart={handleAdd} />
         ))}
       </section>
+
+      <div id="toast-container">
+        {toastMsg && <Toast key={toastKey} mensaje={toastMsg} onClose={() => setToastMsg("")} />}
+      </div>
     </div>
   );
 }

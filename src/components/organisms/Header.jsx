@@ -4,14 +4,15 @@ export default function Header({ onLogout }) {
   return (
     <header>
       <div className="logo">
-        <img src="./imagenes/huertohogar" alt="HuertoHogar Logo" />
+      <div className="header__logo"></div>
       </div>
-      <nav>
-        <Link to="/" className="btn btn-primary">Inicio</Link>
-        <Link to="/catalog" className="btn btn-primary">Catálogo</Link>
-        <Link to="/carrito" className="btn btn-primary">Carrito</Link>
-    </nav>
-
+      <nav className="header__nav">
+        <Link to="/">Inicio</Link>
+        <Link to="/catalog">Catálogo</Link>
+        <Link to="/carrito">Carrito</Link>
+        <Link to="/boleta">Boleta</Link>
+        <Link to="/perfil">Perfil</Link>
+      </nav>
     </header>
   );
 }

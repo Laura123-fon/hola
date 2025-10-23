@@ -7,6 +7,7 @@ export default function Login({ switchToRegister, onLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const usuarioGuardado = localStorage.getItem("usuario");
     const claveGuardada = localStorage.getItem("clave");
 
@@ -29,6 +30,7 @@ export default function Login({ switchToRegister, onLogin }) {
           onChange={(e) => setCorreo(e.target.value)}
           required
         />
+
         <label>Contraseña:</label>
         <input
           type="password"
@@ -36,14 +38,17 @@ export default function Login({ switchToRegister, onLogin }) {
           onChange={(e) => setClave(e.target.value)}
           required
         />
+
         <button type="submit">Entrar</button>
       </form>
+
       <p>
         ¿No tienes cuenta?{" "}
         <a href="#" onClick={switchToRegister}>
           Registrarse
         </a>
       </p>
+
       <p id="errorLogin">{error}</p>
     </div>
   );
